@@ -1,11 +1,35 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Prisma schema for Brothers Fitness Gym Management
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "sqlite"
+  url      = "file:./brothers_fitness.db"
+}
+
+model Admin {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model Member {
+  id        Int      @id @default(autoincrement())
+  name      String
+  age       Int
+  address   String
+  dob       DateTime
+  plan      String   // "1day" | "1week" | "1month" | "3months" | "6months" | "1year"
+  trainee   Boolean  @default(false)
+  joinDate  DateTime
+  endDate   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([endDate])
+  @@index([name])
 }

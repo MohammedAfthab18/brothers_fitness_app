@@ -1,17 +1,33 @@
 {
   "name": "brothers_fitness",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "High-end Gym Management Desktop App",
+  "main": "dist-electron/main/index.js",
+  "author": "Brothers Fitness",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run prisma:generate && vite",
+    "build": "npm run prisma:generate && tsc && vite build && electron-builder",
+    "preview": "vite preview",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "electron:dev": "vite"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^7.0.0",
+    "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "electron-store": "^11.0.2",
+    "lucide-react": "^0.554.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.2.0"
+  },
   "devDependencies": {
     "@electron-toolkit/utils": "^4.0.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
@@ -22,15 +38,27 @@
     "prisma": "^7.0.0",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vite-plugin-electron": "^0.28.9",
+    "vite-plugin-electron-renderer": "^0.14.6"
   },
-  "dependencies": {
-    "@prisma/client": "^7.0.0",
-    "clsx": "^2.1.1",
-    "date-fns": "^4.1.0",
-    "electron-store": "^11.0.2",
-    "lucide-react": "^0.554.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+  "build": {
+    "appId": "com.brothersfitness.app",
+    "productName": "Brothers Fitness",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist",
+      "dist-electron",
+      "generated",
+      "prisma"
+    ],
+    "extraResources": [
+      {
+        "from": "prisma/brothers_fitness.db",
+        "to": "prisma/brothers_fitness.db"
+      }
+    ]
   }
 }
