@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Users, UserPlus, AlertCircle, Search, Plus } from 'lucide-react';
 import StatsCard from './StatsCard';
 import MembersTable from './MembersTable';
